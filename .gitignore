@@ -1,0 +1,6 @@
+.vscode/
+build/
+debugger
+
+# udis86 build target
+udis86/builddir
