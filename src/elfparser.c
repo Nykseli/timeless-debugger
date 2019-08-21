@@ -8,9 +8,9 @@
 #include <unistd.h>
 
 #include "common.h"
-#include "elfparser.h"
 #include "debugger.h"
 #include "decompiler.h"
+#include "elfparser.h"
 
 int instruction_virtual_addr = 0;
 
@@ -143,7 +143,7 @@ int main(int argc, const char* argv[])
             DEBUG("\n");
             DEBUG("sh string: %s\n", (char*)file_bytes + elf_shdr.sh_offset);
             if (elf_shdr.sh_flags == 6)
-                disassemble(file_bytes + elf_shdr.sh_offset, elf_shdr.sh_size, instruction_virtual_addr);
+                disassemble(file_bytes + elf_shdr.sh_offset, elf_shdr.sh_size, instruction_virtual_addr | elf_shdr.sh_offset);
             break;
         case SHT_STRTAB: {
             DEBUG("SHT_STRTAB\n");
