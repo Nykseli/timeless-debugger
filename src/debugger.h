@@ -6,7 +6,7 @@
 #ifndef DEBUG_LEVEL
 #define DEBUG(...) ;
 #else
-#define DEBUG(...) fprintf(strerr, ...)
+#define DEBUG(args...) fprintf(stderr, args)
 #endif
 
 #endif
