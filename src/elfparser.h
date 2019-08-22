@@ -60,4 +60,9 @@ typedef struct name_symbol_arr_t {
     name_symbol* list;
 } name_symbol_arr;
 
+extern elf_instruction_arr instrc_arr;
+extern name_symbol_arr name_arr;
+
+int parse_elf(const char* file);
+
 #endif

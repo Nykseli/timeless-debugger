@@ -7,10 +7,18 @@ UDIS86=build/udis86/decode.o\
 		build/udis86/syn.o\
 		build/udis86/udis86.o\
 
-OBJ=build/decompiler.o
+OBJ=build/decompiler.o\
+	build/elfparser.o
 
 all: $(OBJ)
-	gcc $(OBJ) $(UDIS86) src/elfparser.c -o debugger
+	gcc $(OBJ) $(UDIS86) src/main.c -o debugger
 
-build/decompiler.o: src/decompiler.c
-	gcc -c src/decompiler.c -o build/decompiler.o
+build/%.o: src/%.c
+	gcc -c $< -o $@
+
+# build/decompiler.o: src/decompiler.c
+# 	gcc -c src/decompiler.c -o build/decompiler.o
+#
+# build/elfparser.o: src/elfparser.c
+# 	gcc -c src/elfparser.c -o build/elfparser.o
+#
