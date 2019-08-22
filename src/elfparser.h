@@ -38,4 +38,26 @@ typedef Elf32_Sword Elf_Sword;
 
 #endif
 
+typedef struct elf_instruction_t {
+    Elf_Off offset;
+    size_t size;
+    uint8_t* bits;
+} elf_instruction;
+
+typedef struct elf_instruction_arr_t {
+    size_t size;
+    elf_instruction* list;
+} elf_instruction_arr;
+
+typedef struct name_symbol_t {
+    Elf_Addr st_value;
+    size_t size;
+    char* name;
+} name_symbol;
+
+typedef struct name_symbol_arr_t {
+    size_t size;
+    name_symbol* list;
+} name_symbol_arr;
+
 #endif

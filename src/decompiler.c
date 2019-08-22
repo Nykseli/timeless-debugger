@@ -2,6 +2,7 @@
 #include <string.h>
 
 #include "common.h"
+#include "elfparser.h"
 
 #include "../udis86/udis86.h"
 
@@ -12,7 +13,20 @@
 #define UD_MODE 32
 #endif
 
-void disassemble(uint8_t* buffer, size_t buf_len, int start)
+static void print_sym_name(Elf_Addr st_val, name_symbol_arr* nsa)
+{
+    //TODO: is there a faster lookup than O(n)?
+    char* name = NULL;
+    for (int i = 0; i < nsa->size; i++) {
+        if (nsa->list[i].st_value == st_val) {
+            name = nsa->list[i].name;
+        }
+    }
+    if (name != NULL)
+        printf("\n0x%016x <%s>:\n", st_val, name);
+}
+
+void disassemble(uint8_t* buffer, size_t buf_len, int start, name_symbol_arr* nsa)
 {
     ud_t ud_obj;
     ud_init(&ud_obj);
@@ -22,6 +36,7 @@ void disassemble(uint8_t* buffer, size_t buf_len, int start)
 
     while (ud_disassemble(&ud_obj)) {
         size_t offset = start + ud_insn_off(&ud_obj);
+        print_sym_name(offset, nsa);
         printf("0x%08lx ", offset);
         const char *hex1, *hex2;
         hex1 = ud_insn_hex(&ud_obj);
