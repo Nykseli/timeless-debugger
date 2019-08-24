@@ -21,6 +21,7 @@ name_symbol_arr name_arr;
 void init_elf_instruction_arr(elf_instruction_arr* i_arr)
 {
     i_arr->size = 0;
+    i_arr->capacity = 0;
     i_arr->list = NULL;
 }
 
