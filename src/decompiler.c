@@ -17,13 +17,13 @@ static void print_sym_name(Elf_Addr st_val, name_symbol_arr* nsa)
 {
     //TODO: is there a faster lookup than O(n)?
     char* name = NULL;
-    for (int i = 0; i < nsa->size; i++) {
+    for (size_t i = 0; i < nsa->size; i++) {
         if (nsa->list[i].st_value == st_val) {
             name = nsa->list[i].name;
         }
     }
     if (name != NULL)
-        printf("\n0x%016x <%s>:\n", st_val, name);
+        printf("\n0x%016lx <%s>:\n", st_val, name);
 }
 
 void disassemble(uint8_t* buffer, size_t buf_len, int start, name_symbol_arr* nsa)

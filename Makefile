@@ -1,4 +1,4 @@
-
+CFLAGS := -std=c99 -pthread -Wall -Wextra -Werror -Wno-unused-parameter -Wno-unused-function
 
 UDIS86=build/udis86/decode.o\
 		build/udis86/itab.o\
@@ -11,10 +11,10 @@ OBJ=build/decompiler.o\
 	build/elfparser.o
 
 all: $(OBJ)
-	gcc $(OBJ) $(UDIS86) src/main.c -o debugger
+	gcc $(OBJ) $(UDIS86) src/main.c -o debugger $(CFLAGS)
 
 build/%.o: src/%.c
-	gcc -c $< -o $@
+	gcc -c $< -o $@ $(CFLAGS)
 
 # build/decompiler.o: src/decompiler.c
 # 	gcc -c src/decompiler.c -o build/decompiler.o
