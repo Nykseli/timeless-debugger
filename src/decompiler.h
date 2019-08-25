@@ -5,7 +5,7 @@
 
 #include "elfparser.h"
 
-void disassemble(uint8_t* buffer, size_t buf_len, int start, name_symbol_arr* nsa);
+void dissassemble_instr_array(elf_instruction_arr* arr, name_symbol_arr* nsa);
 
 // translate buffer into parsed asm hex codes
 const uint8_t* asm_buffer(uint8_t* buffer, uint64_t size);

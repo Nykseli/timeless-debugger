@@ -25,6 +25,19 @@ void init_elf_instruction_arr(elf_instruction_arr* i_arr)
     i_arr->list = NULL;
 }
 
+void free_elf_instruction_arr(elf_instruction_arr* i_arr)
+{
+    for (size_t i = 0; i < i_arr->size; i++) {
+        free_elf_instruction(&i_arr->list[i]);
+    }
+}
+
+void free_elf_instruction(elf_instruction* instr)
+{
+    if (instr->bits != NULL)
+        free(instr->bits);
+}
+
 void add_instruction(uint8_t* bits, size_t size, Elf_Off offset)
 {
     elf_instruction ei;

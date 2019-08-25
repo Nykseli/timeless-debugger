@@ -19,9 +19,7 @@ int main(int argc, const char* argv[], const char* argp[])
     printf("Program dissassembly: \n");
     if (parse_elf(argv[1]) == 0) {
         // instrc_arr and name_arr are extern from elfparser.h
-        for (size_t i = 0; i < instrc_arr.size; i++) {
-            disassemble(instrc_arr.list[i].bits, instrc_arr.list[i].size, instrc_arr.list[i].offset, &name_arr);
-        }
+        dissassemble_instr_array(&instrc_arr, &name_arr);
     }
 
     printf("\nRun program...\n");
@@ -29,7 +27,5 @@ int main(int argc, const char* argv[], const char* argp[])
 
     printf("\nRan instructions:\n");
 
-    for (size_t i = 0; i < ran_args.size; i++) {
-        disassemble(ran_args.list[i].bits, ran_args.list[i].size, ran_args.list[i].offset, &name_arr);
-    }
+    dissassemble_instr_array(&ran_args, &name_arr);
 }

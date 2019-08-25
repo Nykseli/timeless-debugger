@@ -1,7 +1,7 @@
 #ifndef DEBUGGER_ELFPARSER_H_
 #define DEBUGGER_ELFPARSER_H_
-#include <elf.h>
 #include "common.h"
+#include <elf.h>
 
 #ifdef ENV_64BIT
 // E_MASHINE is used to check the elf file instuction set
@@ -43,6 +43,7 @@ typedef struct elf_instruction_t {
     Elf_Off offset;
     size_t size;
     uint8_t* bits;
+    char* symbols;
 } elf_instruction;
 
 typedef struct elf_instruction_arr_t {
@@ -67,6 +68,7 @@ extern name_symbol_arr name_arr;
 
 int parse_elf(const char* file);
 void init_elf_instruction_arr(elf_instruction_arr* i_arr);
-
+void free_elf_instruction_arr(elf_instruction_arr* i_arr);
+void free_elf_instruction(elf_instruction* instr);
 
 #endif
