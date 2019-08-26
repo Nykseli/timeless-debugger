@@ -4,6 +4,7 @@
 #include "common.h"
 #include "elfparser.h"
 #include "memory.h"
+#include "options.h"
 
 #include "../udis86/udis86.h"
 
@@ -56,7 +57,9 @@ static void disassemble(elf_instruction* src, elf_instruction_arr* target, name_
         memmove(tmp_instr.bits, hex1, tmp_instr.size);
         ARRAY_APPEND(target, tmp_instr, elf_instruction, list);
 
-        //TODO: print only if verbose
+        if (!option_verbose_output)
+            continue;
+
         if (nsa != NULL)
             print_sym_name(offset, nsa);
         printf("0x%08lx ", offset);

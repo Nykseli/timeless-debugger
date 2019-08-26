@@ -14,7 +14,8 @@ HEADERS=src/common.h\
 		src/decompiler.h\
 		src/elfparser.h\
 		src/memory.h\
-		src/ptracer.h
+		src/ptracer.h\
+		src/options.h
 
 OBJ=build/database.o\
 	build/decompiler.o\

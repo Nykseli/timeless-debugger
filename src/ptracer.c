@@ -50,7 +50,7 @@ static int exec(const char* argv[], const char* argp[])
     // the child to stop and send a signal
     // to the parent, the parent can now
     // switch to PTRACE_SINGLESTEP
-    return execl(argv[1], argv[1], NULL);
+    return execl(argv[0], argv[0], NULL);
 }
 
 static void control(elf_instruction_arr* arr, int pid)
@@ -95,7 +95,7 @@ int ptracer(elf_instruction_arr* arr, int argc, const char* argv[], const char* 
         break;
     case 0:
         if (exec(argv, argp) == -1) {
-            fprintf(stderr, "could not execute %s\n", argv[1]);
+            fprintf(stderr, "could not execute %s\n", argv[0]);
             return 1;
         }
         break;
