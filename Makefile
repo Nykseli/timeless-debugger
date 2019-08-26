@@ -9,13 +9,15 @@ UDIS86=build/udis86/decode.o\
 		build/udis86/udis86.o\
 
 HEADERS=src/common.h\
+		src/database.h\
 		src/debugger.h\
 		src/decompiler.h\
 		src/elfparser.h\
 		src/memory.h\
 		src/ptracer.h
 
-OBJ=build/decompiler.o\
+OBJ=build/database.o\
+	build/decompiler.o\
 	build/elfparser.o\
 	build/memory.o\
 	build/ptracer.o
