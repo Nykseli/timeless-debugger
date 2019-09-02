@@ -1,5 +1,6 @@
 
 #include <stdio.h>
+#include <string.h>
 #include <unistd.h>
 
 #include "common.h"
@@ -11,14 +12,20 @@
 
 // By default we don't need verbose output
 int option_verbose_output = 0;
+int option_asm_syntax = 0;
 
 void print_usage()
 {
-    printf("\
-usage: debugger [-options] excutable [executable options]\n\
-options:\n\
-\t-h\tprint this\n\
-\t-v\tverbose output\n");
+    printf("usage: debugger [-options] excutable [executable options]\n");
+    printf("options:\n");
+    printf("\t-h\t\tprint this\n");
+    printf("\t-s syntax\tset asm syntax. att for att, intel for intel. default: a\n");
+    printf("\t-v\t\tverbose output\n");
+}
+
+void argument_error(char c)
+{
+    printf("invalid argument for option -%c. -h for usage\n", c);
 }
 
 int main(int argc, const char* argv[], const char* argp[])
@@ -32,6 +39,23 @@ int main(int argc, const char* argv[], const char* argp[])
             print_usage();
             return 0;
             break;
+        case 's': {
+            int next = optind + 1;
+            if (argv[next][0] == '-') {
+                argument_error(argv[optind][1]);
+                return 1;
+            } else if (strcmp(argv[next], "intel") == 0) {
+                option_asm_syntax = 1;
+                optind++;
+            }
+            else if (strcmp(argv[next], "att") == 0) {
+                option_asm_syntax = 0;
+                optind++;
+            }else{
+                argument_error(argv[optind][1]);
+                return 1;
+            }
+        }
         case 'v':
             option_verbose_output = 1;
             break;

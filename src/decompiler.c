@@ -38,7 +38,10 @@ static void disassemble(elf_instruction* src, elf_instruction_arr* target, name_
     ud_init(&ud_obj);
     ud_set_input_buffer(&ud_obj, src->bits, src->size);
     ud_set_mode(&ud_obj, UD_MODE);
-    ud_set_syntax(&ud_obj, UD_SYN_ATT);
+    if (option_asm_syntax == 0)
+        ud_set_syntax(&ud_obj, UD_SYN_ATT);
+    else if (option_asm_syntax == 0)
+        ud_set_syntax(&ud_obj, UD_SYN_INTEL);
 
     while (ud_disassemble(&ud_obj)) {
         elf_instruction tmp_instr;
