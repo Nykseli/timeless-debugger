@@ -1,12 +1,14 @@
 CC=gcc
 CFLAGS := -std=c99 -pthread -Wall -Wextra -Werror -Wno-unused-parameter -Wno-unused-function
 
+REST_API=build/c-rest-api/restapi.o
+
 UDIS86=build/udis86/decode.o\
 		build/udis86/itab.o\
 		build/udis86/syn-att.o\
 		build/udis86/syn-intel.o\
 		build/udis86/syn.o\
-		build/udis86/udis86.o\
+		build/udis86/udis86.o
 
 HEADERS=src/common.h\
 		src/database.h\
@@ -21,11 +23,12 @@ OBJ=build/database.o\
 	build/decompiler.o\
 	build/elfparser.o\
 	build/memory.o\
-	build/ptracer.o
+	build/ptracer.o\
+	build/restapi.o
 
 all: $(OBJ) $(HEADERS)
 	@ printf "%8s %-40s %s\n" $(CC) "debugger"
-	@ gcc $(OBJ) $(UDIS86) src/main.c -o debugger $(CFLAGS)
+	@ gcc $(OBJ) $(REST_API) $(UDIS86) src/main.c -o debugger $(CFLAGS)
 
 build/%.o: src/%.c $(HEADERS)
 	@ printf "%8s %-40s %s\n" $(CC) $@

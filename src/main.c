@@ -8,6 +8,7 @@
 #include "elfparser.h"
 #include "options.h"
 #include "ptracer.h"
+#include "restapi.h"
 
 // By default we don't need verbose output
 int option_verbose_output = 0;
@@ -69,4 +70,7 @@ int main(int argc, const char* argv[], const char* argp[])
 
     dissassemble_instr_array(&ran_args, &name_arr);
     db_set_program_execute_instruction_array(&ran_args);
+
+    restapi_main(NULL);
+
 }

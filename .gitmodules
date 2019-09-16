@@ -1,3 +1,6 @@
 [submodule "udis86"]
 	path = udis86
 	url = https://github.com/vmt/udis86
+[submodule "c-rest-api"]
+	path = c-rest-api
+	url = https://github.com/Nykseli/c-rest-api
